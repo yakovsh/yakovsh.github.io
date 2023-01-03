@@ -1,0 +1,23 @@
+---
+layout: post
+title: Opening Popups in IE
+date: 2005-01-04 09:00:27.000000000 -05:00
+redirect_from:
+  - /work/software/opening-popups-in-ie-january-4th-2005/
+---
+<p>Recently I ran across a rather strange error with different browser. Popup windows could be maximized in Opera and Mozilla, but not in IE. The code I was using was as follows (<a>click here to try</a>):</p>
+<blockquote><p>window.open('', '', 'width=200,height=200');</p></blockquote>
+<p>After some digging, I ran across <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_0.asp">the following snippet in MSDN</a>:</p>
+<blockquote><p>When the sFeatures parameter is specified, the features that are not defined in the parameter are disabled. Therefore, when using the sFeatures parameter, it is necessary to enable all the features that are to be included in the new window.</p></blockquote>
+<p>My mistake in IE was that I specified the height and the width WITHOUT telling the browser about the resizability. Here is the corrected code (<a>click here to try</a>):</p>
+<blockquote><p>window.open('', '', 'width=200,height=200',resizable=yes);</p></blockquote>
+<p>But that still doesn't explain why it worked in Opera or Mozilla. So after some more digging, <a href="http://www.quirksmode.org/js/popup.html">an article at QuirksMode.org</a> informed me that:</p>
+<blockquote><p>The popup is always resizable in Mozilla, Safari and Opera.</p></blockquote>
+<p>Go figure.</p>
+<p><strong>UPDATE:</strong> In response to a comment accusing Microsoft of not being HTML-compliant, I want to explain why in this case Microsoft is actually right. The "window.open" method is not defined in any public standard. The only places where it is defined is <a href="http://wp.netscape.com/eng/mozilla/3.0/handbook/javascript/ref_m-q.htm#177627">Netscape's documentation for JavaScript</a> and <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_0.asp">Microsoft's IE documentation</a>,where a resizable flag is mentioned in BOTH. This specific behavior is part of what is known "DOM Level 0" which according to <a href="http://www.w3.org/DOM/Activity">the W3C is defined as follows</a>:</p>
+<blockquote><p><strong>DOM Level 0</strong></p>
+<p>Functionalities equivalent to the ones exposed in Netscape Navigator 3.0 and Microsoft Internet Explorer 3.0 are informally referred to as "Level 0". There is no W3C specification for this Level.</p></blockquote>
+<p>Microsoft's documentation <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/open_0.asp">states that as well</a>:</p>
+<blockquote><p><strong>Standards Information</strong></p>
+<p>There is no public standard that applies to this method.</p></blockquote>
+<p>According to <a href="http://www.quirksmode.org/js/popup.html">QuirksMode.org</a> Netscape 4 had the resizable flag but for some reason starting with Mozilla v1.4 and in both Opera and Safari this flag is no longer present. So in this case, Microsoft is right by preservering the functionality of the resizable flag exactly the same way it has been implemented in IE 4 and Netscape 4.</p>

@@ -1,4 +1,6 @@
 # The Site Configuration
+plugins:
+  - jekyll-redirect-from
 
 # Import the theme
 theme: jekyll-theme-chirpy
@@ -112,9 +114,9 @@ assets:
     env:          # [development|production]
 
 pwa:
-  enabled: true   # the option for PWA feature
+  enabled: false   # the option for PWA feature
 
-paginate: 10
+#paginate: 10
 
 # ------------ The following options are not recommended to be modified ------------------
 

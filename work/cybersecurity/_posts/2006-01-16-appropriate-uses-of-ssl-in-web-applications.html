@@ -1,0 +1,16 @@
+---
+layout: post
+title: Appropriate Uses of SSL in Web Applications
+date: 2006-01-16 09:00:43.000000000 -05:00
+redirect_from:
+  - /work/cybersecurity/appropriate-uses-of-ssl-in-web-applications-january-16th-2006/
+---
+<p>SSL is a nice feature to show off to customers - it has a nice lock icon which reassures users that they are secure. However, it comes at a price - the encryption and decryption process does take up time CPU time on both client and server, in addition to the increased bandwidth that is necessary for transfering encrypted data. In this post I am going to quickly summarize some of the things we learned when we added SSL to web applications in our company.</p>
+<p>There are two extremes when using SSL - you can choose not to use at all, relying on the fact that network sniffing is sufficiently rare. On the other extreme you can go super-crazy and encrypt everything with SSL, thus slowing down your web application and making users less happy. But there is a third choice - a more balanced use of SSL. You can encrypt only certain sensitive sections leaving the rest of the web app unencrypted and fast. If you look around the web, you will find the third choice is what many major websites employ. For example, Amazon only requires login and SSL whenever a user orders something, or accesses private information.</p>
+<p>Of course your choice also depends on the type of application your are working on. For example, a bank should probably encrypt every page in their customer systems since the data is so sensitive. On the other hand, Bob's Cleaners doesn't need to encrypt their informational website, since the data is not sensitive at all. Here I am assuming that the actual web application does not need SSL, but some sensitive sections do.</p>
+<p>When implementing this balanced approach, the usual way to do it would be to encrypt the login page, the login action and any pages that have to do with things like changing passwords, forgotten passwords, and financial information. It is also a good practice to encrypt or hash sensitive data such as passwords and credit card numbers throughout the web application including the database.</p>
+<p>Last but not least, several implementation tips:</p>
+<ul>
+<li>Browsers will display security prompts if you try to switch from a secure to an unsecure page without user interaction such as a redirect. That means that in many cases, you cannot simply send the users once they have logged in to an unsecure page. One way to get around this issue is to point users to a secure page after they have logged in, but provide only non-secure links on that page. When they follow the links, the browser will not prompt them since it is a user action.</li>
+<li>The login page itself should be encrypted as well. Otherwise, the users have no way of knowing if the login page itself is real EVEN if the login action may be encrypted. However, this presents a different problem since many servers will start the session via cookies when the user sees this secure page. The problem is that those cookies will be lost once the user crosses over into a nonsecure section. You can either prompt the user to login again every time they come back to the secure section (like Amazon does). OR you can land them on a unencrypted page first, then redirect them to the secure login page.</li>
+</ul>

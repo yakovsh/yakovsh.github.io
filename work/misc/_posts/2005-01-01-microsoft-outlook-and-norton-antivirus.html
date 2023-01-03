@@ -1,0 +1,22 @@
+---
+layout: post
+title: Microsoft Outlook and Norton AntiVirus 2002
+date: 2005-01-01 09:00:42.000000000 -05:00
+redirect_from:
+  - /work/misc/microsoft-outlook-and-norton-antivirus-2002-january-1st-2005/
+---
+<p>In the past two weeks, three different computers I have worked on for clients displayed the same problem: Outlook would stopped working completely with some weird error message. Doing a quick check with telnet to my own mail servers and running tests on other computers with clients' mail servers quickly narrowed down the problem to the actual three computers. After going through several different programs that were running, I decided to disable Norton AntiVirus 2002. To my suprise things started working again. So I decided to do a little digging.</p>
+<p>The first gem that I found is <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;813514">Microsoft's Knowledge Base Article # 813514</a> which includes the following snippet:</p>
+<blockquote><p>If your antivirus solution includes an e-mail scanning feature, you may have to do additional configuration to use Outlook or Outlook Express with the antivirus e-mail scanning feature. Antivirus software that has been known to cause this problem includes products by the following vendors:<br />
+• Symantec (Norton)<br />
+• McAfee<br />
+• Trend Micro (PC-cillin)<br />
+• Panda</p></blockquote>
+<p>After checking Norton's site I came up a recommendation to update their software via LiveUpdate. The problem is that it did not help. <a href="http://service1.symantec.com/SUPPORT/sunset-c2002kb.nsf/pfdocs/2001155718928866">The article</a> on Symantec's website ended off with the following:</p>
+<blockquote><p>If you are using Outlook 2002 and updating NAV does not fix the problem, then we have had reports that updating to Outlook 2002, Service Pack 2 has fixed the problem.</p></blockquote>
+<p>In other words Microsoft is blaming Symantec while Symantec is blaming Microsoft. To make this even more bizarre another <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;309676">Microsoft KB article (#309676)</a> has the following recommendation:</p>
+<blockquote><p>WORKAROUND:<br />
+To work around this issue, disable the e-mail scan portion of Norton System Works.</p></blockquote>
+<p>And then you start wondering why so many viruses get through on Windows when it is recommended to shut it off.</p>
+<p>In the end I recommended to the clients to disable the email scan portion and rely on the auto-protect functionality. One client had an option to disable "Worm Protection" without disabling the rest of the email scanning options which helped instead. However, I still came away thinking about the bad state of security software on Windows when the OS manufacturer and the anti-virus vendors can't even get their stuff to interoperate.</p>
+<p>P.S. After this entire episode took place, someone working at the IT department of a major US bank informed me that this issue was why his company switched to a different anti-virus vendor.</p>

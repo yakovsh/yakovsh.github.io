@@ -1,0 +1,18 @@
+---
+layout: post
+title: Finding MTA Market Share
+date: 2005-01-31 09:00:27.000000000 -05:00
+redirect_from:
+  - /work/anti-spam/finding-mta-market-share-january-31st-2005/
+---
+<p>One interesting piece of information that I am currently trying to hunt down is the current market share for Mail Transfer Agents (MTAs) on the Internet. This includes only programs that receive and send email between domains through the Internet (as opposed to private networks), and should include open source products as well which would normally be excluded from a commercial survey (since they are free). For an example, <a href="http://www.radicati.com/">the Radicati group</a> publishes a market share analysis for email messaging products BUT excludes almost all open source products.</p>
+<p>Anyway, so far I had managed to find the following surveys, mainly done via analyzing SMTP banner headers directly:</p>
+<p>1. <a href="http://cr.yp.to/surveys.html">DJB's SMTP surveys</a> (1997 - 2001).<br />
+2. <a href="http://www.falkotimme.com/projects/smtp_surveys.php">Falko Timme's two surveys</a> (March and April of 2004).<br />
+3. <a href="http://www.ohse.de/uwe/surveys/smtpauto.html">Uwe Obse's surveys</a> (1999 - 2000).<br />
+4. <a href="http://www.linuks.mine.nu/smtp/">Small SMTP survey</a> (2002 - 2005).<br />
+5. <a href="http://www.credentia.cc/research/">Credentia.cc Surveys</a> (2002 - 2003).<br />
+6. <a href="http://www.tty1.net/smtp-survey/index_en.html">TTY1.NET</a> (2003 - 2004).</p>
+<p>Unfortunatly, the small number of servers surveyed, the research methodology and age of data means that these numbers are basically useless. For example, #1, #3, and #5 are too old. For 2004 there is only #2, #4 and #6. Of these, both TTY1.net and Linuks surveys have only 50,000 hosts which were picked under uncertain criteria. The Falko Timme survey includes the largest number (over 400,000) but the results are very divergent from the others. Considering that back in 2000 DJB estimated the number of mail servers to be 4,000,000 this number is the closest real data. However, Falko does not include the methodology that was used to pick out the hosts.</p>
+<p>Perhaps, it is time to have a new survey based on sound statistical design with inclusion of large numbers of hosts. If you have any additional links or data, please email them to me to <strong>blog /at/ shaftek [dot] org</strong>.</p>
+<p><strong>UPDATE:</strong> Markus Stumpf pointed to <a href="http://www.ornl.gov/lists/mailing-lists/qmail/2003/11/msg00245.html">another 2003 survey</a> of 53,000 hosts done by <a href="http://www.qcc.ca/~charlesc/">Charles Cazabon</a>.</p>

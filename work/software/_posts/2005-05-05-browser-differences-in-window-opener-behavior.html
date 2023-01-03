@@ -1,0 +1,66 @@
+---
+layout: post
+title: Browser Differences in window.opener Behavior
+date: 2005-05-05 09:00:17.000000000 -04:00
+redirect_from:
+  - /work/software/browser-differences-in-window-opener-behavior-may-5th-2005/
+---
+<p>Among the more persistent bugs I have been chasing recently involves a set of interrelated windows. The case in point was a parent window (A) that opened a child window (B) via JavaScript. The child window (B) was set to check whether the parent window (A) is still open before doing any operations on it. Much to my chagrin on Internet Explorer the parent window (A) was reported as open even though it has already been closed, while other browsers said it was closed. After some interesting digging, I am going to share what I found with you.</p>
+<p>To start off, the way I was checking whether the parent window was still open is via a simple JavaScript:</p>
+<blockquote>
+<pre>if(window.opener)</pre>
+</blockquote>
+<p>My logic was that if a parent window does not exist, then there should be no "opener" object for it. For non-Microsoft browsers that logic held up, but not for Internet Explorer. It seems that in IE the <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/opener.asp">"window.opener" property</a> stays valid EVEN after the window has been closed. Why? So you can use the <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/closed.asp">"window.opener.closed" property</a> to see if the parent window has been closed!</p>
+<p>However, much to my suprise the Mozilla documentation <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref10.html#1016953">also includes the window.closed property</a> with a nice example which of course doesn't work in Mozilla. Furthermore, the old Netscape documentation <a href="http://wp.netscape.com/eng/mozilla/3.0/handbook/javascript/ref_a-c.htm#156922">has this as well</a>:</p>
+<blockquote><p><em>The closed property is a boolean value that specifies whether a window has been closed. <strong>When a window closes, the window object that represents it continues to exist</strong>, and its closed property is set to true.</em></p></blockquote>
+<p>Of course given that this is a DOM 0 property and <a href="http://www.shaftek.org/blog/archives/000210.html">as I mentioned before</a> there is no formal specification for it. However, in this case both Mozilla/Netscape AND Microsoft define this object. The question is why in the world does the window object then disappear?</p>
+<p>The answer unfortunatly is that it is a bug - namely <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=165418">Mozilla bug # 165418</a>, opened over three years ago and still not fixed (why <a href="http://www.opera.com">Opera</a> never took care of this bug, I am not sure). HOWEVER, what makes it even more frustrating is that on Mozilla browsers the "window.closed" property does work for a split second after the window is closed. If you wait longer than that, then it stops working. And in case you are relying on IE - keep in mind that there is <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;241109">a rather nasty Microsoft bug # 241109</a> that returns 'false' instead of 'true' for the 'window.closed' property.</p>
+<p>The solution for this problem is the following JavaScript snippet:</p>
+<blockquote>
+<pre>if(!window.opener || window.opener.closed)</pre>
+</blockquote>
+<p>For Mozilla/Netscape/Opera, the first part of the if statement will trigger (until they fix their bugs). For IE 6 the first part will not trigger but the second one will. Unfortunatly, for IE v5 there is no easy solution and I will leave that exercise to the readers (there is <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;241109">"&gt;one suggested by Microsoft</a> but I personally don't like that one).</p>
+<p>In any case, I created some test cases that can be downloaded <a href="http://www.shaftek.org/downloads/blogging/attachments/2005/05/05/window-opener.zip">here</a> to tests different browsers. The page loads a second child window, which loads a third window and closes the second. The third window tests prints out the "window.opener" object and the "window.opener.closed" property. The test is run a second time exactly 1 second later. Results are as follows (I will be adding more results as I get around to testing them):</p>
+<table style="text-align:center;" border="1">
+<tbody>
+<tr>
+<th></th>
+<th>window.opener</th>
+<th>window.opener<br />
+.closed</th>
+<th>window.opener (1 sec later)</th>
+<th>window.opener<br />
+.closed (1 sec later)</th>
+</tr>
+<tr>
+<td>IE 6.0 on Windows XP SP 2</td>
+<td>[object]</td>
+<td>true</td>
+<td>[object]</td>
+<td>true</td>
+</tr>
+<tr>
+<td>Opera 8.0 on Windows XP SP 2 and Linux Fedora Core 3</td>
+<td>null</td>
+<td>cannot access</td>
+<td>null</td>
+<td>cannot access</td>
+</tr>
+<tr>
+<td>Konqueror 3.3.1 on Linux Fedora Core 3</td>
+<td>null</td>
+<td>cannot access</td>
+<td>null</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Firefox 1.03 on Windows XP SP 2 and Linux Fedora Core 3<br />
+Mozilla Suite v1.7.7 on Linux Fedora Core 3</td>
+<td>[object Window]</td>
+<td>true</td>
+<td>null</td>
+<td>cannot access</td>
+</tr>
+</tbody>
+</table>
+<p>(In case you are wondering why Mozilla and IE say "object" when Opera says "null", that is explained in the <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=165418">Mozilla bug report</a>: "typeof(null) is "object" in ECMAScript").</p>

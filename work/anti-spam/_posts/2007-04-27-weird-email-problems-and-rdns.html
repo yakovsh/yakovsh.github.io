@@ -1,0 +1,20 @@
+---
+layout: post
+title: Weird Email Problems and rDNS
+date: 2007-04-27 09:00:33.000000000 -04:00
+redirect_from:
+  - /work/anti-spam/weird-email-problems-and-rdns-april-27th-2007/
+---
+<p>For the past few days I have been troubleshooting a very strange problem at one of my clients. They have a small Windos network of about 7 computers connected to the Internet through a single DSL line. Recently, they begun to experience slowdowns when sending email through Outlook - when email is sent, it takes a minute or so until it actually gets to the server. Needless to say a very annoying thing.</p>
+<p>While at the office, I started troubleshooting with the first computer that had the issue. I tried telneting to port 25 to several mail servers. To my suprise, only two mail servers - the ones they used had the problem, while others such as my own were fine. Their two mail servers - smtp.cavtel.net and smtp.concentric.net would just sit there with a blinking cursor for 30 to 45 seconds until the 220 SMTP banner would come up and then they worked just fine.</p>
+<p>I basically worked my way back from that computer to their Internet connection:<br />
+1. Removed the antivirus on that one computer, no change.<br />
+2. Change firewall settings, no change.<br />
+3. Tried other computers in the office, same problem.<br />
+4. Brought my own computer, same problem.<br />
+5. Upgraded firmware on their router, no change.<br />
+6. Disconnected the router and connected directly to the DSL modem with my own computer, no change.</p>
+<p>At this point I was pretty sure that the issue wasn't on their end. However, what made the problem more weird is that only <strong>some</strong> mail servers were affected but those operated by different companies, AND it wasn't a flat out failure but rather a delay of 30 seconds.</p>
+<p>The next step was to call their ISP - <a href="http://cavtel.com/">Cavalier Telecom</a>. After getting assurances that there was no blockages throttling on their site, the technician I spoke to went to get helps from higher ups. For the next 45 minutes he was putting me own, asking basic questions like "Can you ping our mail server?" and going back to consulting with other technicians. To their credit, they actually knew what they were talking about - something that cannot be said about many other tech support calls nowadays.</p>
+<p>While I was on hold with the ISP, I was googling for different problems. By accident I ran across a mention how AOL rejects any SMTP sessions originating from an IP without an reverse DNS entry (PTR). On a hunch, I went to check if my client's static IP had an rDNS entry - and guess what - they DID NOT! So the next time the technician got on the phone, I asked him to add one in just in case. Half a hour later, mail become blazing fast.</p>
+<p>To summarize, what I believe happened is that the two mail servers in questions were running similar software (Postfix I think) and were trying to resolve the rDNS of the connecting IP when starting the SMTP session. For some reason, the rDNS timeout was set pretty high, and the session basically sat there doing nothing until the lookup failed completely. A very unusual and interesting problem.</p>

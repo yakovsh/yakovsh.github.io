@@ -1,0 +1,13 @@
+---
+layout: post
+title: Why the Left() Function Stops Working in VBA
+date: 2007-11-22 09:00:09.000000000 -05:00
+redirect_from:
+  - /work/software/why-the-left-function-stops-working-in-vba-november-22nd-2007/
+---
+<p>This is an interesting problem that someone had recently. In a VBA-based program, the Left function suddenly stopped working with an error along the lines of "type data mismatch". Being that this is a native function to VBA, my first thoughts were that it was caused by some unwary VBA upgrade. However, the truth turned out to be more interesting.</p>
+<p>It seems that when VBA is compiled, other libraries may import their own functions into the<br />
+global VBA namespace. What that means is if there is another <strong>Left</strong> function function that is global in some library, it would override the VBA built in function since the VBA native stuff is resolved last. A better description of this problem can be found at <a href="http://www.papwalker.com/dllhell/index-page3.html">this DLL Hell site</a> hosted by Walker Software.</p>
+<p>In this instance, it turned out that the <strong>MSHTML</strong> library was the culprit, in particular the <strong><a href="http://msdn2.microsoft.com/en-us/library/aa703613.aspx">IMarkupPointer.Left</a></strong> function which for some reason was exposed globally. Microsoft has <a href="http://support.microsoft.com/kb/276560">an article</a> describing a similar problem with the <strong>Devshl.dll</strong> library.</p>
+<p>What is the solution? To fully qualify the function name adding the namespace which would mean calling <strong>VBA.Left</strong> instead of plain <strong>Left</strong>. Of course, if you have millions lines of code that uses the plain function, you are in trouble. Being that is in VBA 6 which is not .NET and is not really being supported by Microsoft, tough luck.</p>
+<p>Maybe it is time to try out Java or PHP?</p>

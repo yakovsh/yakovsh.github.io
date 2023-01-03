@@ -1,0 +1,31 @@
+---
+layout: post
+title: Making TurboTax.com Work on Linux
+date: 2005-01-18 09:00:37.000000000 -05:00
+redirect_from:
+  - /work/misc/making-turbotax-com-work-on-linux-january-18th-2005/
+---
+<p><strong>(TurboTax now works fine with FireFox on Linux. This post will remain here for historical purposes.)</strong></p>
+<p>I have using <a href="http://turbotax.intuit.com/">Intuit's online version of TurboTax</a> for the past few years to file my taxes. However, this was the first year I used it in Linux. Logically, since it is a web based application, I assumed that it will work fine under Linux. However, I was mistaken.</p>
+<p>After going through the <a href="http://www.irs.gov/efile/article/0,,id=118986,00.html">IRS FreeFile site</a> I was redirected to Intuit's own version of it called <a href="http://www.taxfreedom.com">TaxFreedom.com</a>. However, when I actually tried to start working on my taxes, I got the following message:</p>
+<blockquote><p>TurboTax for the Web does not work with the Web browser you are using. You must use one of the following supported browsers:<br />
+...</p></blockquote>
+<p>What followed was a list of various <a href="http://www.microsoft.com/ie/">Internet Explorer</a> versions and suprisngly <a href="http://channels.netscape.com/ns/browsers/download.jsp">Netscape</a> and <a href="http://www.apple.com/safari/">Safari</a>. Armed with the knowledge that <a href="http://www.mozilla.org">Mozilla's browsers</a>, I assumed that using the "User Agent Switching" feature in Opera would work. However, it still did not work.</p>
+<p>Upon further digging with wget, I ran across <a href="http://www.turbotax.intuit.com/welcome/common/version.js">a JavaScript file</a> that TurboTax's used to check browser versions. To my chagrin I found a comment inside the file stating that "Unix/Linux browsers are not supported". On the brighter side, I also found support for FireFox. Knowing that <a href="http://www.spreadfirefox.com/?q=affiliates&amp;id=13729&amp;t=70">FireFox</a> is basically identical on all platforms, I decided to try using <a href="http://www.chrispederick.com/work/firefox/useragentswitcher/">Chris Pederick's UserAgent Switcher extension</a> for FireFox. I loaded it into my browser, set the user agent to "IE on Windows XP" and voila it worked. For a moment. Unfortunatly, TurboTax really thought that I was using IE and it tried loading ActiveX which of course did not work. At this point I decided that the best solution is faking Firefox on Windows which is clearly supported from the JavaScript file. I tried it and it actually worked!</p>
+<p>To get TurboTax to work on your system, do the following:<br />
+1. <a href="http://www.spreadfirefox.com/?q=affiliates&amp;id=13729&amp;t=70">Install FireFox</a> if you haven't already (for RPMs check <a href="http://rpm.pbone.net/">pbone.net</a>).<br />
+2. <a href="http://www.chrispederick.com/work/firefox/useragentswitcher/download/">Install the User Agent Switcher extension</a> (if you get security warning, follow the prompts to add the site to your list of trusted site for installing software).<br />
+3. Restart FireFox, and go to "Tools", "User Agent Switcher", "Options", "Options". In the options box choose "User Agents" and click "Add" to add a new agent with the following settings:</p>
+<p><strong>Description:</strong> FireFox 1.0 (Windows XP)<br />
+<strong>User Agent:</strong> Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.5) Gecko/20041109 Firefox/1.0<br />
+<strong>App Name:</strong> Netscape<br />
+<strong>App Version:</strong> 5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.5) Gecko/20041109 Firefox/1.0<br />
+<strong>Platform:</strong> Win32</p>
+<p>4. Install <a href="http://www.adobe.com/products/acrobat/readstep2.html">Adobe Acrobat Reader</a> and <a href="http://plugindoc.mozdev.org/linux.html#Acrobat">connect it to FireFox</a>if you want to print your return (also see <a href="https://addons.update.mozilla.org/plugins/">this</a>).</p>
+<p>Leave a comment on this post or email me (blog /at/ shaftek [.] org) if you have comments or problems.</p>
+<p><strong>UPDATE:</strong> There is <a href="http://support.turbotax.com/forums/index.php?showtopic=1006">a poll</a> at the TurboTax website for Linux users.</p>
+<p><strong>UPDATE #2:</strong> The User Agent Switcher extension only works on Firefox, not on Netscape or Mozilla Suite (thanks for Marc Langille for the information).</p>
+<p><strong>UPDATE #3:</strong> A user running SimplyMAPIS v2004.06 with FireFox 1.0 reported that my instructions did not help - TurboTax just hangs there without going anywhere. If anyone else is experiencing the same symptoms, please email me at blog /at/ shaftek [dot] org.</p>
+<p><strong>UPDATE #4:</strong> A user running on SUSE v9.1 reported problems with these instructions. A different workaround that worked for him was changing the "prefs.js" file and adding the following:</p>
+<blockquote><p>user_pref("general.useragent.override", "Mozilla/5.0<br />
+Windows Firefox 1.0; Actually running Linux!");</p></blockquote>

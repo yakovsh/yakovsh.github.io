@@ -1,0 +1,15 @@
+---
+layout: post
+title: Unusual Way to Compress PDFs
+date: 2019-12-29 12:36:33.000000000 -05:00
+redirect_from:
+  - /work/software/unusual-way-to-compress-pdfs-december-29th-2019/
+---
+<p style="text-align:justify;">I recently ran across an unusual way to achieve greater compression for PDF files. Usually, different streams and objects within the PDF file are compressed on their own - that means that do not necessarily share a common dictionary for compression purposes. If you uncompress the PDF streams and objects and then compress it using a utility like ZIP, the compression may sometimes be greater than the original PDF file. This is probably due to the fact that the compression dictionary will be constructed over the entire file instead of individual objects or streams. This approach primarily works over files with large amounts of text and small amounts of images.</p>
+<p>The try it with <strong>pdftk</strong>, do the following:</p>
+<pre>pdftk compressed.pdf output uncompressed.pdf uncompress
+zip compressed.zip uncompressed.pdf</pre>
+<p>Or with 7-Zip:</p>
+<pre>pdftk compressed.pdf output uncompressed.pdf uncompress
+
+7z a compressed.7z uncompressed.pdf</pre>

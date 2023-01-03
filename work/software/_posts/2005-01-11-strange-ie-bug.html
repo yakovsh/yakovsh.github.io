@@ -1,0 +1,29 @@
+---
+layout: post
+title: Strange IE Bug
+date: 2005-01-11 09:00:34.000000000 -05:00
+redirect_from:
+  - /work/software/strange-ie-bug-january-11th-2005/
+---
+<p>Today I came across a VERY strange IE bug - a certain page would not work in IE6 under Windows XP SP2, while it worked fine in Opera, Mozilla and Firefox. The message shown would be as follows:</p>
+<blockquote><p>Internet Explorer cannot open the Internet site [url] Operation aborted</p></blockquote>
+<p>After more digging, I came across a post <a href="http://channel9.msdn.com/wiki/default.aspx/Channel9.InternetExplorerProgrammingBugs">at a Microsoft Wiki</a>:</p>
+<blockquote><p><strong>"Operation aborted"</strong></p>
+<p>Apparently interacting with innerHTML and possibly using other JScript functionality causes IE to pop up "Internet Explorer cannot open the Internet site http://example.com. Operation aborted." messages after loading a page. This is sometimes attributed to BHO mal/spyware, but I can confirm it happens with no such software installed. This bug is present in IE SP1 and IE SP2.</p>
+<p><a href="http://peterjanes.ca/blog/archives/2003/12/03/hulk-smash">http://peterjanes.ca/blog/archives/2003/12/03/hulk-smash</a></p>
+<p>I was having this problem trying to put some html inside a DIV tag using innerHTML and solved the problem by puting the DIV inside a TABLE.</p>
+<p><strong>Sample code for "Operation aborted"</strong></p>
+<p>This sample code will give you the "Operation aborted" error in IE6, while it works as expected in Firefox:</p>
+<pre>  &lt;table&gt; 
+   &lt;tr&gt; 
+    &lt;td&gt; 
+      
+      var d = document.createElement('div'); 
+      document.body.appendChild(d); 
+      
+    &lt;/td&gt; 
+   &lt;/tr&gt; 
+  &lt;/table&gt;</pre>
+<p><strong>If the script part is moved outside the table it works in both IE6 and Firefox.</strong> (Emphasis added)</p></blockquote>
+<p>It seems that this problem is caused by the fact that the SCRIPT block operating on innerHTML or DOM structures is located inside a TABLE tag. I moved the SCRIPT tags outside the TABLE tag, and viola - that fixed the problem.</p>
+<p>Peter Janes pointed out in the comments that the issue is deeper than that, it seems to be related to the timing issues with DOM rendering. I am going to leave it for now unless I see other problems, but using setTimeout or some other way of doing things is not out of the question.</p>

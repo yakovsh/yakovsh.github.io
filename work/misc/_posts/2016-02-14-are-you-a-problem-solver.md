@@ -1,0 +1,21 @@
+---
+title: 'Are You a Problem Solver?'
+date: '2016-02-14T12:31:09+00:00'
+layout: post
+---
+
+ It is a well known ritual of American life – when you meet someone at an event, a party or a family function the conversation at some point turns to work. “So what do you do for a living”, or perhaps “what have you been up to lately” are many of the usual questions. Our careers are very much part of our identity, just like our families and hobbies. For most people working with technology the answers are pretty similar – “making apps”, “designing websites”, “managing servers”, “protecting networks from hackers”, etc. We tend to pigeonhole ourselves into specific slots, using similar titles and descriptions as our peers. This extends past casual conversation to resumes and LinkedIn profiles, leading to hundreds and thousands of “app developers”, “web designers”, “system administrators” and “security engineers”.
+
+At the same time, we often end up being bored or no longer interested in the particular job or area we work in. We often worry about being replaced with outsourced professionals from other countries, or even with a fresh-faced CS college graduate from around the block. We are troubled by how fast things are moving, and how seemingly it is almost impossible to stay up to date. As the result, we sometimes leave the technology field or choose to either keep up with the latest and greatest, or hyper specialize in a specific area.
+
+Why do we describe ourselves as “iOS developers”, “Java programmers”, or “Windows system administrators”? Often, it is something we have been working on recently or perhaps something we chose, liked it and got good at. But if we dig deeper, a surprising truth emerges – we use technology to solve real world problems. The tools we use, the skills we acquire, and professional relationships we create are all focused around that concept, but at the core we are not programmers, sysadmins, or web designers – we are problem solvers. As we move in our careers, the move is often not up and down but sideways – from challenge to challenge, industry to industry and problem to problem.
+
+I recently bumped into an old college friend who is a mechanical engineer. During the inevitable career talk I learned something surprising. He was designing missiles but now he is engineering commercial office buildings. Why was I surprised? Because mentally I had always assumed that engineers hyper specialize and don’t shift from industry to industry. I was wrong because they are also problem solvers.
+
+A good technology professional is like a chef or a carpenter, possessing the basics of their profession but knowing where to look when more is needed. When faced with a challenging new dish or an unusual piece of furniture that needs fixing, chefs and carpenters come up with new ways of solving those problems or use existing approaches, all while relying on their own expertise, as well as others. In a similar fashion, when faced with a new problem to solve for our job, business or even hobby, we may reach into our personal toolbox, but may instead reach out to the wider world and pick up the appropriate technology tools for the job at hand.
+
+Problem solving is hard – it requires skills beyond just knowing how to program or administer a server. These include communications, writing, coordination, ability to research and evaluate new things quickly, and a host of others. It also means reaching outside our comfort zones to use technologies we may not as familiar and comfortable with, all while leveraging our existing skills. We are also forced to think on a higher level, taking into account not just the small piece of the problem we are dealing with but the wider system and business objectives at hand, as well as any existing or future constraints. However, while problem solving is hard, it is also immensely rewarding for it gives us the satisfaction of a job well done.
+
+There is an old saying in the Silicon Valley that the difference between a good programmer and a bad programmer is 10,000%. Perhaps, a more accurate description would be that the difference between a programmer and a problem solver is 10,000%.
+
+*(I want to thank my brother, Gennadiy Shafranovich, for many of the ideas in this post)*

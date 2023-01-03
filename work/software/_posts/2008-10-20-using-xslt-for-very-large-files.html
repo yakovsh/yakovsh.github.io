@@ -1,0 +1,14 @@
+---
+layout: post
+title: Using XSLT for Very Large Files
+date: 2008-10-20 09:00:24.000000000 -04:00
+redirect_from:
+  - /work/software/using-xslt-for-very-large-files-october-20th-2008/
+---
+<p>While I was working recently on one of my projects, I noticed a curious problem. The server I was using was running out of memory while doing a simple XSLT transform. That was sort of strange because the XSLT transform in question was rather simple and the amount of memory on the server was very big (an EC2 instance). After further investigation, it turned out that the issue was due to the large size of the input XML (over 300 MBs) which was clogging up the memory. It seems that most XSLT processors, including <a href="http://xmlsoft.org/XSLT/">libXSLT</a> which I was using, load the input XML into memory completely before doing the transform. A better alternative is to use a process similar to SAX where the input XML is loaded and transformed incrementally - something that is called "streaming". There are several solutions:</p>
+<p>1. Saxon XSLT processor <a href="http://saxon.sourceforge.net/">supports "streaming mode"</a> which allows processing of files upto 20 Gbs. BUT this feature is only available in <a href="http://www.saxonica.com/documentation/changes/intro/highlights91.html">the commercial version</a>.</p>
+<p>2. An alternative to XSLT is something called <a href="http://stx.sourceforge.net/">STX or "Streaming Transformations for XML"</a>, which is specifically designed to address this issue. HOWEVER, it is not a standard of any sort like XSLT and there are only two implementations.</p>
+<p>3. There is a streaming XSLT processor released by a team at a national laboratory but I currently misplaced the link.</p>
+<p>4. Apache Xalan XSLT Processor in <a href="http://xml.apache.org/xalan-j/dtm.html#incremental">incremental mode</a> (note this is NOT true streaming since the entire original file is eventually loaded into memory).</p>
+<p>For my project I choose #4 - Apache Xalan because (a) I wanted an open source solution and (b) I wanted to stick to the XSLT standard as opposed to STX. I might look into STX in the future to reduce the original XML file in size, and then further process it using standard XSLT tools.</p>
+<p>Now the good news is that the next step in the XSLT standardization process at W3C is streaming with something called XSLT2++. Take a look at <a href="http://news.oreilly.com/2008/09/xslt-20-streaming-xml-transfor.html">this O'Reilly news article</a> and <a href="http://saxonica.blogharbor.com/blog/_archives/2008/9/1/3863838.html">a blog post from Michael Kay</a> (the editor of the XSLT WG at W3C). The bad news that it will take at least 18 months for the standards process and who knows how long for the actual implementations.</p>

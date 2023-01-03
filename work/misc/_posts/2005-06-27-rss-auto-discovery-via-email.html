@@ -1,0 +1,14 @@
+---
+layout: post
+title: RSS Auto-Discovery via Email
+date: 2005-06-27 09:00:39.000000000 -04:00
+redirect_from:
+  - /work/misc/rss-auto-discovery-via-email-june-27th-2005/
+---
+<p><a href="http://hxr.us/blojsom/blog/grumpops/computers/blogging/?permalink=Meng_Wong_on_RSS_Email.txt">Andy's blog entry</a> and <a href="http://mengwong.com/rssemail/rssemail-006.pdf">Meng's whitepaper</a> got me thinking about RSS discovery via email. What if some of the emails sent today such as lists, sites like <a href="http://politechbot.com">Politech</a>, etc. included a header pointing to an RSS version of the same content? What if email clients like <a href="http://www.mozilla.org/products/thunderbird/">Thunderbird</a> which already have RSS support, would automatically parse those heades and let the user subscribe to the emails? Then, the next logical step would be something along the lines of Meng's system where an empty email pointing to an RSS feed can be sent to the email receiver, automatically parsed by his reader and retreived.</p>
+<p>After the mention of the "Link" header in Meng's paper and some digging around, I ran across <a href="http://www.mozilla.org/projects/netlib/Link_Prefetching_FAQ.html#What_are_the_prefetching_hints">Mozilla's Pre-fetching FAQ</a> which then pointed me to <a href="http://www.ietf.org/rfc/rfc2068.txt">RFC 2068</a>, section 19.6.2.4. In there, a "link" HTTP header is defined which is semantically the same as the "link" HTML tag currently used for autodiscovery. So what if transplant this header into email as follows:</p>
+<pre>Link: &lt;http://www.shaftek.org/blog/atom.xml&gt;; 
+ rel=alternate; 
+ title="RSS 1.0"; 
+ type="application/rss+xml"</pre>
+<p>It should be trivial to write a Thunderbird extension to parse this and present the user with an option to auto-subscribe. Now we just need someone who wants to write it...</p>

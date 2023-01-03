@@ -1,0 +1,64 @@
+---
+layout: post
+title: How To Wrap Text in a Table Cell
+date: 2005-05-05 10:00:00.000000000 -05:00
+redirect_from:
+  - /work/software/how-to-wrap-text-in-a-table-cell-may-5th-2005/
+---
+An interesting question that came up today during work was how to wrap text in a table cell that does not contain any line breaks or spaces. For example:
+<table style="width:20px;" border="1" align="center">
+<tbody>
+<tr>
+<td style="width:5px;">ThisIsCell1</td>
+<td style="width:15px;">ThisIsCell2</td>
+</tr>
+</tbody>
+</table>
+We want the text inside the cells to wrap to the next line instead of extending the table size. There are three basic solutions:
+
+<strong>1. CSS - Internet Explorer Specific.</strong>
+
+In Internet Explorer, there is a custom CSS extension called <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/wordwrap.asp">"word-wrap"</a> which when set as "word-wrap: break-word;" will do just what we want. For example (only in IE):
+<table style="width:20px;" border="1" align="center">
+<tbody>
+<tr>
+<td style="width:5px;">ThisIsCell1</td>
+<td style="width:15px;">ThisIsCell2</td>
+</tr>
+</tbody>
+</table>
+<strong>2. CSS3 (no browsers yet).</strong>
+
+In CSS 3 a new option called <a href="http://www.w3.org/TR/css3-text/#wrap-option">"wrap-option"</a> is defined which when set as "wrap-option: emergency;" will do the same. Unfortunatly no browser today (except maybe <a href="http://www.apple.com/safari/">Safari</a>) supports it yet. The following example will only work in a CSS 3 browser (none of which I have):
+<table style="width:20px;" border="1" align="center">
+<tbody>
+<tr>
+<td style="width:5px;">ThisIsCell1</td>
+<td style="width:15px;">ThisIsCell2</td>
+</tr>
+</tbody>
+</table>
+<strong>3. JavaScript (all browsers).</strong>
+
+Another solution would be to use JavaScript to break up the text into specific sized chunks. The downside of this approach is that you have to figure out what the chunk size would be. A good example of a JavaScript can be found <a href="http://www.experts-exchange.com/Web/Web_Languages/Q_21243591.html">here</a>. I slightly modified it as follows:
+<pre>strbuff='ThisIsCell1';
+    newstr='';
+    startI = 0;
+    max=2;
+    str='';
+    subarr=new Array(parseInt(strbuff.length/max+1));
+    for (i=0;i    {
+       subarr[i]=strbuff.substr(startI,max);
+       startI+=max;
+    }
+    for (i=0;i    {
+       newstr+=subarr[i]+'';
+    }
+    str+=subarr[subarr.length-1];
+    document.write(newstr);
+ } else {
+ 	document.write(strbuff);
+ }</pre>
+There is also a fourth way to do it via XSLT as described in Jeni Tennison's book but I don't have the time to get to that today. I will try to post a followup tomorrow.
+<br/><br/><br/>
+<strong>UPDATE:</strong> Here is the <a href="https://gist.github.com/yakovsh/5d01cc174110c09eb621">followup post</a>.

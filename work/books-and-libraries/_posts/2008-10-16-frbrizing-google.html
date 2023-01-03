@@ -1,0 +1,10 @@
+---
+layout: post
+title: FRBRizing Google
+date: 2008-10-16 09:00:43.000000000 -04:00
+redirect_from:
+  - /work/books-and-libraries/frbrizing-google-october-16th-2008/
+---
+<p>As I mentioned six months ago, one of the big things in the library world is <a href="http://en.wikipedia.org/wiki/FRBR">FRBR</a> which seeks to link all editions of the same book together. The OCLC offers their take on it as a web service called <a href="http://xisbn.worldcat.org/">xISBN</a>, and LibraryThing does something similar with <a href="http://www.librarything.com/api">thingISBN</a>. Back in March, I wrote about how a hidden feature in Amazon's API does something similar and can be used as a third public service for that type of information.</p>
+<p>Sometime in the summer, I found a <span style="text-decoration:underline;"><strong>fourth</strong></span> public service that offers something similar - Google Book Search. There is a special search operator called "editions" which can be used to lookup all editions of a given ISBN. For for the canonical Dune example, one would type in "<strong>editions:ISBN0441172717</strong>" in <a href="http://books.google.com/books?q=editions%3AISBN0441172717">Google Book Search</a> and voila, out come the results! Of course, using <a href="http://code.google.com/apis/books/">their Book API</a> makes it easier.</p>
+<p>I added this as a fourth service to my BookChaser Editions tool.</p>

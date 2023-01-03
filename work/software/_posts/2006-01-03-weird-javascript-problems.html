@@ -1,0 +1,12 @@
+---
+layout: post
+title: Weird JavaScript problems
+date: 2006-01-03 09:00:02.000000000 -05:00
+redirect_from:
+  - /work/software/weird-javascript-problems-january-3rd-2006/
+---
+<p>For quite some time I have been trying to track down a strange Javascript error. In one of the forms in our application, we have a dynamically generated set of DOM form fields generated on the fly via Javascript. Something like "document.myForm.appendField(field);". The page in question worked just fine in Opera and Firefox, but refuses to work in IE with no errors. It turns out that all of the fields had the same name AND Opera/Firefox took the first field while IE rightfully so refused and returned a collection instead. For example:</p>
+<blockquote>
+<pre>alert(document.myForm.field.value)</pre>
+</blockquote>
+<p>However there are multiple "field" fields in the form, and for some reason both Opera and Firefox returned only the first one. Unfortunatly, I was not able to reproduce the problem in a standard alone web page.</p>

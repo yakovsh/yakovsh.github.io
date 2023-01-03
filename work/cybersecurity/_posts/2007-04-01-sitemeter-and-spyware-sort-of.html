@@ -1,0 +1,36 @@
+---
+layout: post
+title: SiteMeter and Spyware (Sort of)
+date: 2007-04-01 09:00:55.000000000 -04:00
+redirect_from:
+  - /work/cybersecurity/sitemeter-and-spyware-sort-of-april-1st-2007/
+---
+<p>Tonight word comes from multiple blogs (<a href="http://www.digg.com/tech_news/Did_Sitemeter_sell_out_to_Spyware">here</a>, <a href="http://www.alphecca.com/mt_alphecca_archives/003155.html">here</a>, <a href="http://smoothstone.blogspot.com/2007/03/off-topic-adios-sitemeter.html">here</a> and <a href="http://blog.statcounter.com/?p=4">here</a>) that a popular free stats called <a href="http://www.sitemeter.com">SiteMeter</a> made a deal with a third party marketing company called <a href="http://www.specificclick.com">Specific Media</a> to place tracking cookies on ALL sites that use SiteMeter. Sitemeter's <a href="http://www.sitemeter.com/?a=privacy">privacy policy</a> makes no mention of this fact. Needless to say people are leaving the service in droves. I do not use this service on this site, but do use it on at least two other sites that I operate. I will be waiting a little bit before removing it in case they change their mind.</p>
+<p>I took a look tonight at the Javascript that SiteMeter sends out and was able to confirm what others have been saying. Here is the relevant snippet:</p>
+<p><code>var newIFrame = document.createElement("iframe");<br />
+newIFrame.frameBorder=0;<br />
+newIFrame.width = 0;<br />
+newIFrame.height = 0;<br />
+newIFrame.src="http://dg.specificclick.net/?u=" mce_src="http://dg.specificclick.net/?u=" +<br />
+escape(document.location) + "&amp;r=" + SiteMeter.getReferral();<br />
+...<br />
+parentOfScript.insertBefore(newIFrame,scriptRef);<br />
+</code></p>
+<p>As you can see, this piece of code creates a hidden IFRAME that is sent over to the Specific Media servers. The server returns a set of tracking cookies back from the IFRAME request:</p>
+<blockquote><p>p3p: policyref="http://www.specificmedia.com/w3c/p3p.xml", CP="NON DSP COR ADM DEV PSA PSD IVA OUT BUS STA"</p>
+<p>Set-Cookie: dmc=0tI-5mV2XP.-UizyToBLTyoWE.-UiyyToBLTyoWE.-UhaoNkzkkIskM.-UhYjpL9Z7uCCD.-UhY----------.-UhYjpL9Z7uCCD.-Ufoqnj95tRCzm.-Sa_eZYVjhqc3-; Domain=.specificclick.net; Expires=Mon, 31-Mar-2008 05:18:00 GMT; Path=/<br />
+dmk=0tI-5mV2XP.-Sa_blm17MIsM6Gh; Domain=.specificclick.net; Expires=Mon, 31-Mar-2008 05:18:00 GMT; Path=/<br />
+smc=0tI-5mV2XP.-UizyToBLTyoWE.-UiyyToBLTyoWE.-UhaoNkzkkIskM.-UhYjpL9Z7uCCD.-UhY----------.-UhYjpL9Z7uCCD.-Ufoqnj95tRCzm.-Sa_eZYVjhqc3-; Domain=.specificclick.net; Expires=Mon, 31-Mar-2008 05:18:00 GMT; Path=/<br />
+smk=0tI-5mV2XP.-Sa_blm17MIsM6Gh; Domain=.specificclick.net; Expires=Mon, 31-Mar-2008 05:18:00 GMT; Path=/</p>
+<p>Content-Length: 0<br />
+Date: Sun, 01 Apr 2007 05:17:59 GMT<br />
+Server: Apache-Coyote/1.1</p>
+<p>200 OK</p></blockquote>
+<p>Here is some information on what this specific cookie does: <a href="http://paretologic.com/resources/definitions.aspx?remove=specificclick%20cookie">here</a>, <a href="http://www.google.com/search?q=specificclick">here</a> and <a href="http://www3.ca.com/securityadvisor/pest/pest.aspx?id=453074335">here</a>. While this is not true spyware per se - there is not physical software installed, nevertheless it is a tracking cookie which is being installed without permission.</p>
+<p>Additionally, what is glaring is lack of mention of this in the privacy policy. The <a href="http://www.ftc.gov">FTC</a> has been known to go after companies what violate their own privacy policies, so if I were SiteMeter, I would rectify this issue really fast.</p>
+<p><span style="text-decoration:underline;"><strong>UPDATE (04/10/2007):</strong></span></p>
+<p>As seen in the comments of <a href="http://www.shaftek.org/blog/archives/000429.html">my previous posts</a> and <a href="http://conservablogs.com/EricOdom/2007/04/09/sitemeter-responds-to-the-blogosphere/">here</a>, Sitemeter decided to respond. Two points:<br />
+1. Why wait for over a week before a response? Blogs are there for a reason - its gives companies ability to respond quickly.<br />
+2. Why not post about it on <a href="http://weblog.sitemeter.com/">their own blog?</a></p>
+<p>Setting that aside the crux of Sitemeter's argument has been that Specific Click's cookies aren't spyware and if anti-spyware companies label it as such, it is their problem. Additionally, Specific Click provides <a href="http://www.networkadvertising.org/consumer/opt_out.asp">an opt out option</a> and so does Sitemeter itself. They also were nice enough to update their <a href="http://www.sitemeter.com/?a=privacy">privacy policy</a> (but not before I filed a complaint with the <a href="http://www.ftc.gov">FTC</a>).</p>
+<p>However, they tend to miss the point - the issue is not what they did but rather how they did it. Any company has a basic responsibility towards their customers about informing them of major changes before doing them. In Sitemeter's case if they would have blogged about it ahead of time AND let people have an option of opting out, it would have been very different. Instead, they did it without asking AND did not do anything about it for over a week after the story broke. All of which makes me very suspicious. For now, I am still holding out for a little bit to see if anything changes before making my decision to use their services.</p>
