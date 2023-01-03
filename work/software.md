@@ -1,6 +1,7 @@
 ---
 title: Work / Software
 layout: page
+tags: work
 ---
 
 Most of my daily work involves software engineering in some sort or fashion. I have worked on library automation software, [CRM software](https://www.solidmatrix.com/) for field service, [visual SQL tools](http://www.biofortis.com/products/qiagram/) for making interactions with databases easier, and most recently [mobile apps](https://www.noom.com/) to help people get healthier.

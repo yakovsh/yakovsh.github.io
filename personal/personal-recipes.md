@@ -1,6 +1,7 @@
 ---
 title: Personal / Recipes
 layout: page
+tags: personal
 ---
 Here are some recipes and food-related articles I have published over the years.
 

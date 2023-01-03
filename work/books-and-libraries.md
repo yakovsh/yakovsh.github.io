@@ -1,6 +1,7 @@
 ---
 title: 'Work / Books and Libraries'
 layout: page
+tags: work
 ---
 
 I have a keen interest in books, publishing and library science. I created, participated in and researched multiple book-related projects over the years.

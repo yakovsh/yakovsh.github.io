@@ -1,6 +1,7 @@
 ---
 title: Personal / Bio
 layout: page
+tags: personal
 ---
 
 <span style="text-decoration:underline;">**Short Bio:** </span>

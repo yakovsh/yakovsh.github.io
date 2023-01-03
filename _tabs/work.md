@@ -17,7 +17,7 @@ over the years.
 
 <ul>
 {% for page in site.pages %}
-  {% if page.dir == "/work/" %}
+  {% if page.tags contains "work" %}
       <li><a href="{{ page.url }}">{{ page.title | replace: "Work /", "" }}</a></li>
   {% endif %}
 {% endfor %}

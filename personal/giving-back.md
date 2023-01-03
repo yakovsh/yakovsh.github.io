@@ -1,6 +1,7 @@
 ---
 title: Personal / Giving Back
 layout: page
+tags: personal
 ---
 
 I try to give back to the community around me whenever I can. Currently, I do the following:

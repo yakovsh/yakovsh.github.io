@@ -1,6 +1,7 @@
 ---
 title: Work / Misc
 layout: page
+tags: work
 ---
 
 This section contains various technology related articles I have written that don’t fit anywhere else.

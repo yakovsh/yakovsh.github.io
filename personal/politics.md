@@ -1,6 +1,7 @@
 ---
 title: Personal / Politics
 layout: page
+tags: personal
 ---
 
 I had a brief involvement in local politics, particulary in Baltimore City / State of Maryland around 2007-2014. I also served as a Board member (2011-2014) of the [Fallstaff Improvement Association](http://www.welcometofallstaff.org/), a local neighbourhood association covering Northwest Baltimore and I used to also maintain their website.

@@ -1,6 +1,7 @@
 ---
 title: Personal / Writing
 layout: page
+tags: personal
 ---
 
 I am passionate about reading and writing, both fiction and non-fiction. However, majority of my writing is either technology-related, or has not been published.

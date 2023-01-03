@@ -9,7 +9,7 @@ Here you can find some non-work/non-technology things about me.
 
 <ul>
 {% for page in site.pages %}
-  {% if page.dir == "/personal/" %}
+  {% if page.tags contains "personal" %}
       <li><a href="{{ page.url }}">{{ page.title | replace: "Personal /", "" }}</a></li>
   {% endif %}
 {% endfor %}

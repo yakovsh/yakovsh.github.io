@@ -1,6 +1,7 @@
 ---
 title: Work / Anti-spam
 layout: page
+tags: work
 ---
 
 This page contains articles I have written related to anti-spam technologies and research, primarily focused on my work at the Anti-Spam Research Group (ASRG) and related standards.

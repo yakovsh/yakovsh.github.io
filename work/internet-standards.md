@@ -1,6 +1,7 @@
 ---
 title: 'Work / Internet Standards'
 layout: page
+tags: work
 ---
 
 I maintain a continued interest in Internet standards and related work. Below you will find some of my related work in this area.

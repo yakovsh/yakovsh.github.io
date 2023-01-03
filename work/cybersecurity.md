@@ -1,6 +1,7 @@
 ---
 title: Work / Cybersecurity
 layout: page
+tags: work
 ---
 
 I contribute to research and do contract work but most of that work is not available publicly due to contractual obligations. Most of my public cybersecurity work is being published [on the Nightwatch Cybersecurity Blog here](https://wwws.nightwatchcybersecurity.com/blog/).
