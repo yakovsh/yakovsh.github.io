@@ -4,5 +4,4 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-<b>Use this form to contact me</b>
-{% include contact-form.html %}
+You can contact me via email to <b>contact /at/ shaftek [dot] org</b>
